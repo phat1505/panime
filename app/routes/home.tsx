@@ -1,13 +1,63 @@
 import type { Route } from "./+types/home";
-import { Welcome } from "../welcome/welcome";
+import Header from "../components/Header";
+import FilmList from "../components/FilmList";
+import Footer from "../components/Footer";
+import { useEffect, useState } from "react";
+
+type Film = {
+  id: number;
+  title: string;
+  anime: boolean;
+  cartoon: boolean;
+  description: string;
+  dateuploaded: string;
+  countview: number;
+  linkimg: string;
+  linkvideo: string;
+};
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "New React Router App" },
-    { name: "description", content: "Welcome to React Router!" },
+    { title: "Panime" },
+    { name: "description", content: "Welcome to PM TuBe" },
   ];
 }
 
 export default function Home() {
-  return <Welcome />;
+  const [latestFilms, setLatestFilms] = useState<Film[]>([]);
+
+  useEffect(() => {
+    const stored = localStorage.getItem("films");
+    if (stored) {
+      const allFilms: Film[] = JSON.parse(stored);
+      // Sắp xếp theo id giảm dần (mới nhất trước)
+      const sorted = allFilms.sort((a, b) => b.id - a.id);
+      // Lấy 8 phim mới nhất
+      setLatestFilms(sorted.slice(0, 8));
+    }
+  }, []);
+
+  return (
+    <div>
+      <Header />
+      <div>
+        <img
+          src="/images/bg.jpg"
+          className="w-full fixed -z-5 h-[700px] opacity-30"
+        />
+
+        <div className="flex justify-center">
+          <div className="w-[1000px] h-[700px] mt-10">
+            <div className="w-[920px] text-3xl text-center py-2 bg-slate-800 ml-10">
+              <h1>Phim mới cập nhật</h1>
+            </div>
+
+            {/* Truyền 8 phim mới nhất vào FilmList */}
+            <FilmList films={latestFilms} />
+          </div>
+        </div>
+      </div>
+      <Footer />
+    </div>
+  );
 }

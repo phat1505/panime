@@ -4,12 +4,25 @@
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
-
+@font-face {
+  font-family: 'handcraft';
+  src: url('/fonts/HandcraftsScriptFree.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'creative';
+  src: url('/fonts/CreativeBrave.ttf') format('truetype');
+}
 html,
 body {
-  @apply bg-white dark:bg-gray-950;
 
   @media (prefers-color-scheme: dark) {
     color-scheme: dark;
   }
-}
+};
+nav{
+  font-family: 'creative', cursive;
+};
+h1{
+  font-family: 'handcraft', cursive;
+};
+
