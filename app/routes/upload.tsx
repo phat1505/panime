@@ -23,7 +23,13 @@ const loadFromLocal = (): Film[] => {
     const data = localStorage.getItem("films");
     return data ? JSON.parse(data) : [];
 };
-
+const fileToBase64 = (file: File): Promise<string> =>
+    new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result as string);
+        reader.onerror = (err) => reject(err);
+    });
 export default function Upload({ onAddFilm }: AddFilmFormProps) {
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
     const [selectedURL, setSelectedURL] = useState<string>("");
@@ -37,6 +43,10 @@ export default function Upload({ onAddFilm }: AddFilmFormProps) {
 
     const handleSummit = async (e: React.FormEvent) => {
         e.preventDefault();
+        let imgBase64 = "";
+        if (selectedFile) {
+            imgBase64 = await fileToBase64(selectedFile);
+        }
         const newFilm: Film = {
             id: Date.now(),
             title,
@@ -44,7 +54,7 @@ export default function Upload({ onAddFilm }: AddFilmFormProps) {
             anime,
             cartoon,
             dateuploaded: dateUploaded,
-            linkimg: selectedFile ? URL.createObjectURL(selectedFile) : "",
+            linkimg: imgBase64,
             linkvideo: selectedURL,
             countview: countView,
         };

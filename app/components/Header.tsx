@@ -26,6 +26,11 @@ export default function Header() {
                     </li>
                 </ul>
             </nav>
+            <menu>
+                <hr className="border-gray-600 mb-4" />
+                
+            </menu>
         </div>
+
     );
 }
