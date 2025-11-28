@@ -204,7 +204,7 @@ export default function Upload() {
               <img
                 src={film.linkimg}
                 alt=""
-                className="w-full h-40 object-cover rounded"
+                className="w-full h-40 object-contain rounded"
               />
               <h3 className="text-xl font-bold mt-2">{film.title}</h3>
               <p className="text-sm opacity-75">{film.dateuploaded}</p>
