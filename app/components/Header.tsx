@@ -1,14 +1,15 @@
 import { NavLink } from "react-router";
-
+import { useState } from "react";
 function cnActive(isActive: boolean) {
     return isActive ? "text-cyan-300" : "hover:text-sky-300";
 }
 export default function Header() {
+    const [menuOpen, setMenuOpen] = useState(false);
     return (
         <div>
-            <nav className="flex bg-gray-800 py-2 font-bold">
-                <h2 className="w-2/6 text-center text-5xl text-gray-300"><NavLink to="/">Panime</NavLink></h2>
-                <ul className="w-4/6 text-4xl flex justify-center gap-30">
+            <nav className=" bg-gray-800 py-2 font-bold flex justify-between">
+                <h2 className="w-1/5 text-center text-5xl text-gray-300"><NavLink to="/">Panime</NavLink></h2>
+                <ul className="w-4/5 text-4xl justify-center gap-30 md:flex hidden">
                     <li>
                         <NavLink to="/" className={({ isActive }) => cnActive(isActive)}>Home</NavLink>
                     </li>
@@ -25,11 +26,38 @@ export default function Header() {
                         <NavLink to="/upload" className={({ isActive }) => cnActive(isActive)}>Upload</NavLink>
                     </li>
                 </ul>
+                <button
+                    className="md:hidden text-gray-300 focus:outline-none"
+                    onClick={() => setMenuOpen(!menuOpen)}
+                >
+                    {/* Simple Hamburger Icon */}
+                    <div className="space-y-1 ">
+                        <span className="block w-6 h-0.5 bg-gray-300"></span>
+                        <span className="block w-6 h-0.5 bg-gray-300"></span>
+                        <span className="block w-6 h-0.5 bg-gray-300"></span>
+                    </div>
+                </button>
             </nav>
-            <menu>
-                <hr className="border-gray-600 mb-4" />
-                
-            </menu>
+            {/* Mobile dropdown menu */}
+            {menuOpen && (
+                <ul className="md:hidden bg-gray-700 text-center space-y-2 py-4">
+                    <li>
+                        <NavLink to="/" className={({ isActive }) => cnActive(isActive)} onClick={() => setMenuOpen(false)}>Home</NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/anime" className={({ isActive }) => cnActive(isActive)} onClick={() => setMenuOpen(false)}>Anime</NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/cartoon" className={({ isActive }) => cnActive(isActive)} onClick={() => setMenuOpen(false)}>3D Cartoon</NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/ranking" className={({ isActive }) => cnActive(isActive)} onClick={() => setMenuOpen(false)}>Ranking</NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/upload" className={({ isActive }) => cnActive(isActive)} onClick={() => setMenuOpen(false)}>Upload</NavLink>
+                    </li>
+                </ul>
+            )}
         </div>
 
     );

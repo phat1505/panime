@@ -39,7 +39,7 @@ export default function FilmList({ films, setFilms }: FilmListProps) {
   };
 
   return (
-    <div className="grid grid-cols-4 gap-10 p-5">
+    <div className="grid md:grid-cols-4 grid-cols-2 gap-10 p-5">
       {films.length === 0 && (
         <p className="text-white col-span-4 text-center">Không có phim nào!</p>
       )}

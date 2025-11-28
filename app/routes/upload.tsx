@@ -106,7 +106,7 @@ export default function Upload({ onAddFilm }: AddFilmFormProps) {
     return (
         <div>
             <Header />
-            <form onSubmit={handleSummit} className="flex flex-col gap-4 p-4 w-[1000px] h-[600px] mx-auto bg-white text-black my-10 rounded-2xl">
+            <form onSubmit={handleSummit} className="flex flex-col gap-4 p-4 md:w-[1000px] md:h-[600px] w-[400px] mx-auto bg-white text-black my-10 rounded-2xl">
 
                 <label>Title's Film: <input type="text"
                     placeholder="Title's Film"
@@ -157,12 +157,12 @@ export default function Upload({ onAddFilm }: AddFilmFormProps) {
                 </label>
                 <button type="submit" className="bg-slate-500 p-2 rounded-2xl hover:text-sky-300 text-white w-[200px] mx-auto">Upload Film</button>
             </form>
-            <div className="w-[1000px] mx-auto mt-10 bg-white text-black p-4 rounded-xl">
+            <div className="md:w-[1000px] w-[400px] mx-auto mt-10 bg-white text-black p-4 rounded-xl">
                 <h2 className="text-2xl font-bold mb-4">Danh sách phim đã upload</h2>
 
                 {filmList.length === 0 && <p>Chưa có phim nào</p>}
 
-                <div className="grid grid-cols-3 gap-4">
+                <div className="grid md:grid-cols-3 grid-cols-1 gap-4">
                     {filmList.map(film => (
                         <div key={film.id} className="border rounded-lg p-3 shadow">
                             <img src={film.linkimg} alt="" className="w-full h-40 object-cover rounded" />

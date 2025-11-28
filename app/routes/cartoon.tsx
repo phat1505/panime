@@ -27,25 +27,26 @@ export default function Cartoon() {
     }, []);
 
     return (
-        <div>
-            <Header />
-
-            <img
-                src="/images/bg.jpg"
-                className="w-full fixed -z-5 h-[850px] opacity-30"
-            />
-
-            <div className="flex justify-center">
-                <div className="w-[1000px] h-[700px] mt-10">
-                    <div className="w-[920px] text-3xl text-center py-2 bg-slate-800 ml-10">
-                        <h1>Cartoon mới cập nhật</h1>
-                    </div>
-
-                    <FilmList films={cartoonFilms} />
-                </div>
-            </div>
-
-            <Footer />
-        </div>
+       <div>
+             <Header />
+             <div>
+               <img
+                 src="/images/bg.jpg"
+                 className="md:w-full fixed -z-5 md:h-[850px] w-[400px] h-[650px] opacity-30"
+               />
+       
+               <div className="flex justify-center">
+                 <div className="md:w-[1000px] h-[700px] mt-10">
+                   <div className="md:w-[920px] w-[400px] text-3xl text-center py-2 bg-slate-800 md:ml-10">
+                     <h1>Cartoon mới cập nhật</h1>
+                   </div>
+       
+                   {/* Truyền 8 phim mới nhất vào FilmList */}
+                   <FilmList films={cartoonFilms} />
+                 </div>
+               </div>
+             </div>
+             <Footer />
+           </div>
     );
 }
