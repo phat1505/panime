@@ -5,7 +5,7 @@ export default function Login() {
     return (
         <div>
             <Header />
-            <div className="h-150">
+            <div className="h-170">
                 <div>
                 <img src="/images/bg.jpg" className="md:w-full absolute inset-0 -z-5 md:h-[750px] w-[400px] h-[650px] opacity-30 " />
                 </div>
