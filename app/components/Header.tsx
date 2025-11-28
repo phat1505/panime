@@ -31,10 +31,10 @@ export default function Header() {
                     onClick={() => setMenuOpen(!menuOpen)}
                 >
                     {/* Simple Hamburger Icon */}
-                    <div className="space-y-1 ">
-                        <span className="block w-6 h-0.5 bg-gray-300"></span>
-                        <span className="block w-6 h-0.5 bg-gray-300"></span>
-                        <span className="block w-6 h-0.5 bg-gray-300"></span>
+                    <div className="space-y-1 p-2">
+                        <span className="block w-10 h-1.5 bg-gray-300 rounded-full"></span>
+                        <span className="block w-10 h-1.5 bg-gray-300 rounded-full"></span>
+                        <span className="block w-10 h-1.5 bg-gray-300 rounded-full"></span>
                     </div>
                 </button>
             </nav>
