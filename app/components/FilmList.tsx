@@ -15,7 +15,7 @@ type Film = {
 
 type FilmListProps = {
   films: Film[];
-  setFilms?: React.Dispatch<React.SetStateAction<Film[]>>; // optional nếu muốn update viewCount
+  setFilms?: React.Dispatch<React.SetStateAction<Film[]>>;
 };
 
 export default function FilmList({ films, setFilms }: FilmListProps) {
@@ -41,15 +41,13 @@ export default function FilmList({ films, setFilms }: FilmListProps) {
   return (
     <div className="grid md:grid-cols-4 grid-cols-2 gap-10 p-5">
       {films.length === 0 && (
-        <p className="text-white col-span-4 text-center">Không có phim nào!</p>
+        <p className="w-[1000px] text-white text-xl text-center">Không có phim nào!...</p>
       )}
 
       {films.map((film) => (
         <div key={film.id} className="text-white">
-          <a
-            href={film.linkvideo}
-            target="_blank"
-            rel="noreferrer"
+          <Link
+            to={`/detail/${film.id}`}
             onClick={() => handleClick(film)}
           >
             <img
@@ -57,7 +55,7 @@ export default function FilmList({ films, setFilms }: FilmListProps) {
               alt={film.title}
               className="w-[200px] h-[250px] rounded hover:brightness-75 transition"
             />
-          </a>
+          </Link>
           <p className="text-center mt-2 font-bold">{film.title}</p>
           <p className="text-center text-sm opacity-70">
             Views: {film.countview}
