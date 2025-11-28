@@ -121,7 +121,7 @@ export default function Upload() {
       <form
         ref={formRef}
         onSubmit={handleSummit}
-        className="flex flex-col gap-4 p-4 w-[1000px] h-auto mx-auto bg-white text-black my-10 rounded-2xl"
+        className="flex flex-col gap-4 p-4 md:w-[1000px] w-[400px] h-auto mx-auto bg-white text-black my-10 rounded-2xl"
       >
         <label>
           Title's Film:
@@ -193,12 +193,12 @@ export default function Upload() {
         </button>
       </form>
 
-      <div className="w-[1000px] mx-auto mt-10 bg-white text-black p-4 rounded-xl">
+      <div className="md:w-[1000px] w-[400px] mx-auto mt-10 bg-white text-black p-4 rounded-xl">
         <h2 className="text-2xl font-bold mb-4">Danh sách phim đã upload</h2>
 
         {filmList.length === 0 && <p>Chưa có phim nào</p>}
 
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid md:grid-cols-3 grid-cols-1 gap-4">
           {filmList.map((film) => (
             <div key={film.id} className="border rounded-lg p-3 shadow">
               <img
