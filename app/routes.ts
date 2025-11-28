@@ -6,4 +6,5 @@ export default [index("routes/home.tsx"),
     route("ranking", "routes/ranking.tsx"),
     route("upload", "routes/upload.tsx"),
     route("detail/:id", "routes/detail.tsx"),
+    route("login", "routes/login.tsx"),
 ] satisfies RouteConfig;

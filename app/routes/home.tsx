@@ -16,7 +16,7 @@ type Film = {
   linkvideo: string;
 };
 
-export function meta({}: Route.MetaArgs) {
+export function meta({ }: Route.MetaArgs) {
   return [
     { title: "Panime" },
     { name: "description", content: "Welcome to PM TuBe" },
@@ -41,13 +41,11 @@ export default function Home() {
     <div>
       <Header />
       <div>
-        <img
-          src="/images/bg.jpg"
-          className="md:w-full fixed -z-5 md:h-[850px] w-[400px] h-[650px] opacity-30"
-        />
-
+        <div>
+          <img src="/images/bg.jpg" className="md:w-full absolute inset-0 -z-5 md:h-[750px] w-[400px] h-[650px] opacity-30 " />
+        </div>
         <div className="flex justify-center">
-          <div className="md:w-[1000px] h-[700px] mt-10">
+          <div className="md:w-[1000px] h-[650px] mt-10">
             <div className="md:w-[920px] w-[400px] text-3xl text-center py-2 bg-slate-800 md:ml-10">
               <h1>Phim mới cập nhật</h1>
             </div>
