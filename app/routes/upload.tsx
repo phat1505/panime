@@ -40,28 +40,53 @@ export default function Upload({ onAddFilm }: AddFilmFormProps) {
     const [anime, setAnime] = useState<boolean>(false);
     const [cartoon, setCartoon] = useState<boolean>(false);
     const [filmList, setFilmList] = useState<Film[]>(loadFromLocal());
+    const [editingId, setEditingId] = useState<number | null>(null);
 
+    const handleEdit = (id: number, updatedFilm: Film) => {
+        const updated = filmList.map((f) => (f.id === id ? updatedFilm : f));
+        setFilmList(updated);
+        localStorage.setItem("films", JSON.stringify(updated));
+    }
     const handleSummit = async (e: React.FormEvent) => {
         e.preventDefault();
         let imgBase64 = "";
         if (selectedFile) {
             imgBase64 = await fileToBase64(selectedFile);
         }
-        const newFilm: Film = {
-            id: Date.now(),
-            title,
-            description,
-            anime,
-            cartoon,
-            dateuploaded: dateUploaded,
-            linkimg: imgBase64,
-            linkvideo: selectedURL,
-            countview: countView,
-        };
-        const updated = [...filmList, newFilm];
-        setFilmList(updated);
-        saveToLocal(updated);
-        alert("Upload thành công!");
+        if (editingId) {
+            // Edit mode
+            const updatedFilm: Film = {
+                id: editingId,
+                title,
+                description,
+                anime,
+                cartoon,
+                dateuploaded: dateUploaded,
+                linkimg: imgBase64 || filmList.find(f => f.id === editingId)?.linkimg || "",
+                linkvideo: selectedURL,
+                countview: filmList.find(f => f.id === editingId)?.countview || 0,
+            };
+            handleEdit(editingId, updatedFilm);
+            alert("Cập nhật thành công!");
+            setEditingId(null); // reset
+        } else {
+            // Upload mới
+            const newFilm: Film = {
+                id: Date.now(),
+                title,
+                description,
+                anime,
+                cartoon,
+                dateuploaded: dateUploaded,
+                linkimg: imgBase64,
+                linkvideo: selectedURL,
+                countview: 0,
+            };
+            const updated = [...filmList, newFilm];
+            setFilmList(updated);
+            saveToLocal(updated);
+            alert("Upload thành công!");
+        }
 
         // Reset input
         setTitle("");
@@ -152,6 +177,21 @@ export default function Upload({ onAddFilm }: AddFilmFormProps) {
                                 className=" bg-red-500 text-blue px-2 py-1 rounded hover:bg-red-600"
                             >
                                 Xóa
+                            </button>
+                            <button
+                                onClick={() => {
+                                    setEditingId(film.id);
+                                    setTitle(film.title);
+                                    setDescription(film.description);
+                                    setDateUploaded(film.dateuploaded);
+                                    setSelectedURL(film.linkvideo);
+                                    setAnime(film.anime);
+                                    setCartoon(film.cartoon);
+                                    setSelectedFile(null);
+                                }}
+                                className="bg-yellow-500 text-white px-2 py-1 rounded hover:bg-yellow-600 m-2 "
+                            >
+                                Edit
                             </button>
                         </div>
                     ))}
