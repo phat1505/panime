@@ -33,7 +33,7 @@ export default function Ranking() {
           <div>
             <img
               src="/images/bg.jpg"
-              className="w-full fixed -z-5 h-[700px] opacity-30"
+              className="w-full fixed -z-5 h-[850px] opacity-30"
             />
     
             <div className="flex justify-center">
