@@ -5,6 +5,7 @@ function cnActive(isActive: boolean) {
 }
 export default function Header() {
     const [menuOpen, setMenuOpen] = useState(false);
+    console.log("Header rendered");
     return (
         <div>
             <nav className=" bg-gray-800 py-2 font-bold flex justify-between">

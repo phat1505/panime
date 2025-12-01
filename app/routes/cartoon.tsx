@@ -22,7 +22,9 @@ export default function Cartoon() {
         const stored = localStorage.getItem("films");
         if (stored) {
             const all = JSON.parse(stored) as Film[];
-            setCartoonFilms(all.filter((f) => f.cartoon === true));
+            const filtered = all.filter((f) => f.cartoon === true);
+            const sorted = filtered.sort((a, b) => b.id - a.id);
+            setCartoonFilms(sorted);
         }
     }, []);
 

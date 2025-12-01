@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 type Film = {
   id: number;
@@ -19,12 +19,12 @@ type FilmListProps = {
 };
 
 export default function FilmList({ films, setFilms }: FilmListProps) {
-  const handleClick = (film: Film) => {
+  const handleClick = (filmss: Film) => {
     // Tăng viewCount
-    const updatedFilm = { ...film, countview: film.countview + 1 };
+    const updatedFilm = { ...filmss, countview: filmss.countview + 1 };
     if (setFilms) {
       setFilms((prev) =>
-        prev.map((f) => (f.id === film.id ? updatedFilm : f))
+        prev.map((f) => (f.id === filmss.id ? updatedFilm : f))
       );
     }
     // Cập nhật localStorage
@@ -32,33 +32,36 @@ export default function FilmList({ films, setFilms }: FilmListProps) {
     if (stored) {
       const allFilms: Film[] = JSON.parse(stored);
       const updated = allFilms.map((f) =>
-        f.id === film.id ? updatedFilm : f
+        f.id === filmss.id ? updatedFilm : f
       );
       localStorage.setItem("films", JSON.stringify(updated));
     }
   };
-
+const navigate = useNavigate();
   return (
     <div className="grid md:grid-cols-4 grid-cols-2 gap-10 p-5">
       {films.length === 0 && (
         <p className="w-[1000px] text-white text-xl text-center">Không có phim nào!...</p>
       )}
 
-      {films.map((film) => (
-        <div key={film.id} className="text-white">
-          <Link
-            to={`/detail/${film.id}`}
-            onClick={() => handleClick(film)}
+      {films.map((filmsss) => (
+        <div key={filmsss.id} className="text-white">
+          <button
+            onClick={() => {
+              handleClick(filmsss);
+              navigate(`/detail/${filmsss.id}`);
+            }}
+            className="focus:outline-none"
           >
             <img
-              src={film.linkimg}
-              alt={film.title}
+              src={filmsss.linkimg}
+              alt={filmsss.title}
               className="w-[200px] h-[250px] rounded hover:brightness-75 transition"
             />
-          </Link>
-          <p className="text-center mt-2 font-bold">{film.title}</p>
+          </button>
+          <p className="text-center mt-2 font-bold">{filmsss.title}</p>
           <p className="text-center text-sm opacity-70">
-            Views: {film.countview}
+            Views: {filmsss.countview}
           </p>
         </div>
       ))}
